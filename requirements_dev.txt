@@ -1,5 +1,0 @@
-coveralls
-coverage
-pytest
-flake8
--r requirements.txt
