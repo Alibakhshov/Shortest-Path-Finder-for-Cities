@@ -13,7 +13,7 @@ engine = create_engine(
 
 db.session = scoped_session(
     sessionmaker(
-        autocommit=True,
+        autocommit=False,
         autoflush=False,
         bind=engine
     )

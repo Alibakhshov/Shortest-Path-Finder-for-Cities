@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-  <title>TSP 2D/3D GIS visualization</title>
+  <title>Design and Analysis of Algorithm</title>
   <!-- Bootstrap -->
   <link href="{{ url_for('static', filename='bootstrap/bootstrap.min.css') }}" rel="stylesheet">
   <!-- Bootstrap slider -->
@@ -53,28 +53,45 @@
     </form>
     <div class="panel-group" style="z-index:500; position: absolute; top: 20px; left:20px;">
       <iframe src="" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
-        <div class="panel panel-primary panel-transparent">
-          <div class="panel-heading">Construction heuristics</div>
+      <div class="panel panel-primary panel-transparent">
+
           <div class="panel-body">
-            <div class="btn-group-vertical btn-block" >
-              <button type="button" class="btn btn-primary" onclick="tourConstruction('nearest_neighbor')">Nearest neighbor</button>
-              <button type="button" class="btn btn-primary" onclick="tourConstruction('nearest_insertion')">Nearest insertion</button>
-              <button type="button" class="btn btn-primary" onclick="tourConstruction('farthest_insertion')">Farthest insertion</button>
-              <button type="button" class="btn btn-primary" onclick="tourConstruction('cheapest_insertion')">Cheapest insertion</button>
+            <div class="btn-group-vertical btn-block">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                        Select Construction Heuristic
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" onclick="tourConstruction('nearest_neighbor')">Nearest neighbor</a></li>
+                        <li><a href="#" onclick="tourConstruction('nearest_insertion')">Nearest insertion</a></li>
+                        <li><a href="#" onclick="tourConstruction('farthest_insertion')">Farthest insertion</a></li>
+                        <li><a href="#" onclick="tourConstruction('cheapest_insertion')">Cheapest insertion</a></li>
+                    </ul>
+                </div>
             </div>
-          </div>
         </div>
+      </div>
+    
   
-        <div class="panel panel-primary panel-transparent">
-          <div class="panel-heading">Optimization heuristics</div>
-          <div class="panel-body">  
-            <div class="btn-group-vertical btn-block" >
-              <button type="button" class="btn btn-primary" onclick="tourConstruction('pairwise_exchange')">Pairwise exchange</button>
-              <button type="button" class="btn btn-primary" onclick="tourConstruction('node_insertion')">Node insertion</button>
-              <button type="button" class="btn btn-primary" onclick="tourConstruction('edge_insertion')">Edge insertion</button>
-            </div>
+      <div class="panel panel-primary panel-transparent">
+          <div class="panel-body">
+              <div class="btn-group-vertical btn-block">
+                  <div class="btn-group">
+                      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                          Select Optimization Heuristic
+                          <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu">
+                          <li><a href="#" onclick="tourConstruction('pairwise_exchange')">Pairwise exchange</a></li>
+                          <li><a href="#" onclick="tourConstruction('node_insertion')">Node insertion</a></li>
+                          <li><a href="#" onclick="tourConstruction('edge_insertion')">Edge insertion</a></li>
+                      </ul>
+                  </div>
+              </div>
           </div>
-        </div>
+      </div>
+    
   
         <div class="panel panel-primary panel-transparent">
           <div class="panel-heading">Visualization speed</div>

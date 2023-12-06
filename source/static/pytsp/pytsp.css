@@ -1,37 +1,124 @@
 html, body {
     height: 100%;
     margin: 0;
+    font-family: 'Arial', sans-serif;
 }
 
-#map {
-    min-height: 100%; 
+body {
+    background-color: #f8f9fa;
 }
 
-#earth {
-    min-height: 100%; 
+#map, #earth {
+    min-height: 100%;
 }
 
 .list-group-item {
-background-color: transparent;
-padding: 15px 15px;
+    background-color: transparent;
+    padding: 15px 15px;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.list-group-item:hover {
+    background-color: #f0f0f0; /* Light gray on hover */
 }
 
 #slider-css .slider-selection {
-background: #BABABA;
+    background: #6c757d; /* Bootstrap gray color */
 }
 
 .panel-transparent {
-background: none;
+    background: none;
+    border: 3px solid #6c757d; /* Bootstrap gray color */
+    margin-top: 100%;
+    margin-bottom: 0;
+    transition: border-color 0.3s ease;
+    display: block;
+    
 }
 
 .score {
-cursor: default;
+    cursor: default;
+    font-weight: bold;
 }
 
-.slider.slider-horizontal{
-width:10vw !important;
+.slider.slider-horizontal {
+    width: 10vw !important;
 }
 
 .well {
-background-color: rgba(245, 245, 245, 0.5);
+    background-color: rgba(245, 245, 245, 0.8); /* Lighter gray background */
+    border: 1px solid #dee2e6; /* Bootstrap light gray border */
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle box shadow */
+}
+
+/* Customize Bootstrap buttons with animation */
+.btn-success, .btn-primary {
+    background-color: #28a745; /* Green color */
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-success:hover, .btn-primary:hover {
+    background-color: #218838; /* Slightly darker on hover */
+}
+
+/* Add scale animation on button click */
+.btn-success:active, .btn-primary:active {
+    transform: scale(0.95);
+}
+
+.dropdown-menu {
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle box shadow */
+    animation: fadeIn 0.5s ease;
+}
+
+/* Customize Bootstrap panel with animation */
+.panel-info {
+    border: 1px solid #28a745; /* Green color */
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle box shadow */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.panel-info:hover {
+    border-color: #218838; /* Slightly darker on hover */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Box shadow on hover */
+}
+
+.panel-info .panel-heading {
+    background-color: #28a745; /* Green color */
+    color: #fff; /* White text */
+}
+
+.panel-info .panel-body {
+    background-color: #fff; /* White background */
+}
+
+/* Customize Bootstrap input type file with animation */
+.btn-file {
+    background-color: #28a745; /* Green color */
+    color: #fff; /* White text */
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-file:hover {
+    background-color: #218838; /* Slightly darker on hover */
+}
+
+/* Add scale animation on file input click */
+.btn-file:active {
+    transform: scale(0.95);
+}
+
+/* Custom fadeIn animation */
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    25% { opacity: 0.25; }
+    50% { opacity: 0.5; }
+    75% { opacity: 0.75; }
+    100% { opacity: 1; }
 }
