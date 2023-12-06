@@ -9,14 +9,42 @@
         "state": "New York"
     }, 
     {
-        "city": "Tajikistan", 
+        "city": "Kazakhstan", 
         "growth_from_2000_to_2013": "4.8%", 
-        "latitude": 38.5486864, 
-        "longitude": 68.8155587, 
+        "latitude": 51.1694, 
+        "longitude": 71.4491, 
         "population": "8405837", 
         "rank": "1", 
-        "state": "Dushanbe"
+        "state": "Nur-Sultan"
     }, 
+    {
+        "city": "Uzbekistan", 
+        "growth_from_2000_to_2013": "4.8%", 
+        "latitude": 41.2995, 
+        "longitude": 69.2401, 
+        "population": "8405837", 
+        "rank": "1", 
+        "state": "Tashkent"
+    }, 
+    {
+        "city": "Turkmenistan", 
+        "growth_from_2000_to_2013": "4.8%", 
+        "latitude": 37.9601, 
+        "longitude": 58.3261, 
+        "population": "8405837", 
+        "rank": "1", 
+        "state": "Ashgabat"
+    }, 
+    {
+        "city": "Kyrgyzstan", 
+        "growth_from_2000_to_2013": "4.8%", 
+        "latitude": 42.8746, 
+        "longitude": 74.5698, 
+        "population": "8405837", 
+        "rank": "1", 
+        "state": "Bishkek"
+    }, 
+   
     {
         "city": "Los Angeles", 
         "growth_from_2000_to_2013": "4.8%", 
