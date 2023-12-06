@@ -1,1 +1,15 @@
 venv
+DS_Store/
+.DS_Store
+*.pyc
+*.pyo
+*.pyd
+*.swp
+*.log
+*.bak
+*.cache
+*.project
+*.pydevproject
+*.settings
+*.db
+

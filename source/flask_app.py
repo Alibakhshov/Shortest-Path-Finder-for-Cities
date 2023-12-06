@@ -60,7 +60,7 @@ def index():
         cities=cities,
         async_mode=socketio.async_mode
     )
-
+    
 
 @bp.route('/<algorithm>', methods=['POST'])
 def algorithm(algorithm):

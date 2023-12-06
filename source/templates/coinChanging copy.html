@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coin Changing Problem</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      margin: 0;
+      overflow: hidden;
+    }
+  </style>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@r128/build/three.module.js",
+        "three-text-sprite": "https://unpkg.com/three-text-sprite@2.2.1/dist/index.module.js"
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1>Coin Changing Problem Solver</h1>
+  <label for="amount">Enter Amount:</label>
+  <input type="number" id="amount" min="1" step="1" placeholder="Enter amount">
+  <br>
+  <label for="coins">Enter Coins (comma-separated):</label>
+  <input type="text" id="coins" placeholder="Enter coins">
+  <br>
+  <button onclick="solveCoinChange()">Solve</button>
+
+  <script type="module">
+    import * as THREE from 'three';
+    import { TextSprite } from 'three-text-sprite';
+
+    function solveCoinChange() {
+      const amount = parseInt(document.getElementById('amount').value);
+      const coins = document.getElementById('coins').value.split(',').map(coin => parseInt(coin));
+
+      if (isNaN(amount) || coins.some(isNaN)) {
+        alert('Please enter valid numbers');
+        return;
+      }
+
+      const result = coinChange(amount, coins);
+      visualizeCoinChange(result, coins);
+    }
+
+    function coinChange(amount, coins) {
+      const dp = Array(amount + 1).fill(Infinity);
+      const coinUsed = Array(amount + 1).fill(null);
+      dp[0] = 0;
+
+      for (const coin of coins) {
+        for (let i = coin; i <= amount; i++) {
+          if (dp[i - coin] + 1 < dp[i]) {
+            dp[i] = dp[i - coin] + 1;
+            coinUsed[i] = coin;
+          }
+        }
+      }
+
+      const result = [];
+      let currentAmount = amount;
+      while (currentAmount > 0) {
+        result.push(coinUsed[currentAmount]);
+        currentAmount -= coinUsed[currentAmount];
+      }
+
+      return result.reverse();
+    }
+
+    function visualizeCoinChange(coinsUsed, coinValues) {
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+      const renderer = new THREE.WebGLRenderer();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.body.appendChild(renderer.domElement);
+
+      // Add a directional light to illuminate the coins
+      const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+      directionalLight.position.set(1, 1, 1).normalize();
+      scene.add(directionalLight);
+
+      // Add ambient light to brighten the scene
+      const ambientLight = new THREE.AmbientLight(0x404040); 
+      scene.add(ambientLight);
+
+      let xPosition = -50;
+
+      for (let i = 0; i < coinsUsed.length; i++) {
+        const coinValue = coinValues[i];
+        const radius = 10;
+        const height = coinValue * 2;
+
+        const geometry = new THREE.CylinderGeometry(radius, radius, height, 32);
+        const material = new THREE.MeshStandardMaterial({ color: 0xf1c40f });
+
+        const coinMesh = new THREE.Mesh(geometry, material);
+
+        coinMesh.position.set(xPosition, height / 2, 0);
+        scene.add(coinMesh);
+
+        // Add text label for coin value
+        const textSprite = new TextSprite({
+          text: coinValue.toString(),
+          fontFamily: 'Arial, sans-serif',
+          fontSize: 12,
+          color: '#ffffff',
+        });
+        textSprite.position.set(xPosition - 5, height + 10, 0);
+        scene.add(textSprite);
+
+        xPosition += 30;
+      }
+
+      camera.position.z = 70;
+
+      const animate = function () {
+        requestAnimationFrame(animate);
+
+        // Rotate the coins
+        scene.children.forEach(coinMesh => {
+          if (coinMesh instanceof THREE.Mesh) {
+            coinMesh.rotation.x += 0.01;
+            coinMesh.rotation.y += 0.01;
+          }
+        });
+
+        renderer.render(scene, camera);
+      };
+
+      animate();
+    }
+  </script>
+</body>
+</html>
