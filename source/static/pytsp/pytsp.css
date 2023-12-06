@@ -30,12 +30,11 @@ body {
 .panel-transparent {
     background: none;
     border: 3px solid #6c757d; /* Bootstrap gray color */
-    margin-top: 100%;
-    margin-bottom: 0;
     transition: border-color 0.3s ease;
     display: block;
     
 }
+
 
 .score {
     cursor: default;
@@ -88,13 +87,26 @@ body {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Box shadow on hover */
 }
 
-.panel-info .panel-heading {
+.panel-info {
     background-color: #28a745; /* Green color */
     color: #fff; /* White text */
 }
 
+.panel-heading{
+    background-color: #28a745;  
+    color: #fff; /* White text */
+    border: none;
+}
+
 .panel-info .panel-body {
     background-color: #fff; /* White background */
+}
+
+.panel-primary {
+    border: 1px solid #28a745; /* Green color */
+    border-radius: 4px;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.1); /* Subtle box shadow */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* Customize Bootstrap input type file with animation */

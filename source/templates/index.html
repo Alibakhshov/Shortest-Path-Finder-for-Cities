@@ -30,13 +30,13 @@
   </head>
   <body>  
     <form id="aform" method="post">
-      <div class="btn-group" style="z-index:500; position: absolute; left:40vw; top:10px;">  
+      <div class="btn-group" style="z-index:500; position: absolute; left:40vw; top:10px;">
         {% if view == '2D' %}
-          <button type="submit" class="btn btn-primary" name="view" value="3D">3D view</button>
+        <button type="submit" class="btn btn-primary" name="view" value="3D">3D view</button>
         {% else %}
-          <button type="submit" class="btn btn-primary" name="view" value="2D">2D view</button>
+        <button type="submit" class="btn btn-primary" name="view" value="2D">2D view</button>
         {% endif %}
-  
+    
         <div class="btn-group">
           <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Tile layer
             <span class="caret"></span>
@@ -46,121 +46,152 @@
             <li><a onclick="switch_layer('gm')"> Google Maps </a></li>
             <li><a onclick="switch_layer('nasa')"> NASA</a></li>
           </ul>
-        </div> 
-  
+        </div>
+    
         <strong><p class="btn btn-danger score" style="min-width:100px;" id="score">Score</p></strong>
+        <button type="button" class="btn btn-primary" id="togglePanelGroup">Toggle Panel Group</button>
       </div>
     </form>
-    <div class="panel-group" style="z-index:500; position: absolute; top: 20px; left:20px;">
-      <iframe src="" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
-      <div class="panel panel-primary panel-transparent">
-
+    
+    <div id="containerPanelGroups" style="display: none;">
+      <div class="panel-group" style="z-index:500; position: absolute; top: 20px; left:20px;">
+        <iframe src="" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
+        <div class="panel panel-primary panel-transparent">
+      
           <div class="panel-body">
             <div class="btn-group-vertical btn-block">
-                <div class="btn-group">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                        Select Construction Heuristic
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a href="#" onclick="tourConstruction('nearest_neighbor')">Nearest neighbor</a></li>
-                        <li><a href="#" onclick="tourConstruction('nearest_insertion')">Nearest insertion</a></li>
-                        <li><a href="#" onclick="tourConstruction('farthest_insertion')">Farthest insertion</a></li>
-                        <li><a href="#" onclick="tourConstruction('cheapest_insertion')">Cheapest insertion</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-      </div>
-    
-  
-      <div class="panel panel-primary panel-transparent">
-          <div class="panel-body">
-              <div class="btn-group-vertical btn-block">
-                  <div class="btn-group">
-                      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                          Select Optimization Heuristic
-                          <span class="caret"></span>
-                      </button>
-                      <ul class="dropdown-menu">
-                          <li><a href="#" onclick="tourConstruction('pairwise_exchange')">Pairwise exchange</a></li>
-                          <li><a href="#" onclick="tourConstruction('node_insertion')">Node insertion</a></li>
-                          <li><a href="#" onclick="tourConstruction('edge_insertion')">Edge insertion</a></li>
-                      </ul>
-                  </div>
+              <div class="btn-group">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                  Select Construction Heuristic
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a href="#" onclick="tourConstruction('nearest_neighbor')">Nearest neighbor</a></li>
+                  <li><a href="#" onclick="tourConstruction('nearest_insertion')">Nearest insertion</a></li>
+                  <li><a href="#" onclick="tourConstruction('farthest_insertion')">Farthest insertion</a></li>
+                  <li><a href="#" onclick="tourConstruction('cheapest_insertion')">Cheapest insertion</a></li>
+                </ul>
               </div>
+            </div>
           </div>
-      </div>
-    
-  
+        </div>
+      
+      
         <div class="panel panel-primary panel-transparent">
-          <div class="panel-heading">Visualization speed</div>
-          <div class="panel-body">    
-              <input id="base_slider" data-slider-id='slider-css' type="text" data-slider-min="1" data-slider-max="1000" data-slider-step="10" data-slider-value="100"/>
+          <div class="panel-body">
+            <div class="btn-group-vertical btn-block">
+              <div class="btn-group">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                  Select Optimization Heuristic
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a href="#" onclick="tourConstruction('pairwise_exchange')">Pairwise exchange</a></li>
+                  <li><a href="#" onclick="tourConstruction('node_insertion')">Node insertion</a></li>
+                  <li><a href="#" onclick="tourConstruction('edge_insertion')">Edge insertion</a></li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
+      
+      
+        <div class="panel panel-transparent" style="cursor: pointer;">
+          <div class="panel-heading" onclick="toggleVisualizationSpeed()">Visualization speed</div>
+          <div class="panel-body" id="visualizationSpeedContent" style="display: none;">
+            <input id="base_slider" data-slider-id='slider-css' type="text" data-slider-min="1" data-slider-max="1000" data-slider-step="10" data-slider-value="100" />
+          </div>
+        </div>
+        
+
+      </div>
+      
+      <div class="panel-group" style="z-index:500; position: absolute; top: 20px; right:20px;">
+        <form id="fileform" class="form-horizontal form-label-left" enctype="multipart/form-data" method="post">
+          <div style="padding-bottom:5px;">
+            <label class="btn btn-default btn-file" style="width:100%;">Import a graph
+              <input id="file" name="file" style="visibility:hidden; display:none" type="file">
+            </label>
+          </div>
+        </form>
+      
+        <div class="panel panel-transparent" style="cursor: pointer;">
+          <div class="panel-heading" onclick="toggleDeterministicAlgorithm()">Deterministic algorithm</div>
+          <div class="panel-body" id="deterministicAlgorithmContent" style="display: none;">
+            <div class="btn-group-vertical btn-block">
+              <button type="button" class="btn btn-primary" onclick="tourConstruction('ILP_solver')">Linear programming</button>
+            </div>
+          </div>
+        </div>
+      
+        <div class="panel panel-transparent" style="cursor:pointer;">
+          <div class="panel-heading" onclick="toggleGeneticAlgorithm()">Genetic algorithm</div>
+          <div class="panel-body" id="geneticAlgorithmContent" style="display: none;">
+            <div class="btn-group-vertical btn-block">
+              <button type="button" class="btn btn-primary" onclick="geneticAlgorithm('genetic_algorithm')">Start</button>
+            </div><br><br>
+            <ul class="list-group">
+              <li class="list-group-item"><input id="ga_slider" data-slider-id='slider-css' type="text" data-slider-min="10" data-slider-max="500" data-slider-step="10" data-slider-value="50" /></li>
+              <li class="list-group-item"><input id="Mutation_rate" data-slider-id='slider-css' type="text" data-slider-min="0" data-slider-max="1" data-slider-step="0.01" data-slider-value="0.5" /></li>
+              <li class="list-group-item"><input id="Crossover_rate" data-slider-id='slider-css' type="text" data-slider-min="0" data-slider-max="1" data-slider-step="0.01" data-slider-value="0.5" /></li>
+            </ul>
+            <div class="dropdown">
+              <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="width:100%;"><span id="crossover">Crossover method</span>
+                <span class="caret"></span></button>
+              <input type='hidden' id="type" value='crossover'>
+              <ul class="dropdown-menu">
+                <li><a href="#">OC</a></li>
+                <li><a href="#">MPC</a></li>
+                <li><a href="#">PMC</a></li>
+              </ul>
+            </div>
+            <div class="dropdown">
+              <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="width:100%;"><span id="mutation">Mutation method</span>
+                <span class="caret"></span></button>
+              <input type='hidden' id="type" value='mutation'>
+              <ul class="dropdown-menu">
+                <li><a href="#">Swap</a></li>
+                <li><a href="#">Insertion</a></li>
+                <li><a href="#">Displacement</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
-  
-    <div class="panel-group" style="z-index:500; position: absolute; top: 20px; right:20px;">
-      <form id="fileform" class="form-horizontal form-label-left" enctype="multipart/form-data" method="post" >
-        <div style="padding-bottom:5px;">
-          <label class="btn btn-default btn-file" style="width:100%;">Import a graph
-            <input id="file" name="file" style="visibility:hidden; display:none" type="file">
-          </label>
-        </div>
-      </form>
-  
-      <div class="panel panel-primary panel-transparent">
-        <div class="panel-heading">Deterministic algorithm</div>
-        <div class="panel-body">
-          <div class="btn-group-vertical btn-block" >
-            <button type="button" class="btn btn-primary" onclick="tourConstruction('ILP_solver')">Linear programming</button>
-          </div>
-        </div>
-      </div>
-  
-      <div class="panel panel-primary panel-transparent">
-        <div class="panel-heading"><p id="generation">Genetic algorithm</p></strong>
-        </div>
-        <div class="panel-body">
-          <div class="btn-group-vertical btn-block" >
-            <button type="button" class="btn btn-primary" onclick="geneticAlgorithm('genetic_algorithm')">Start</button>
-          </div><br><br>
-          <ul class="list-group">
-            <li class="list-group-item"><input id="ga_slider" data-slider-id='slider-css' type="text" data-slider-min="10" data-slider-max="500" data-slider-step="10" data-slider-value="50"/></li>
-            <li class="list-group-item"><input id="Mutation_rate" data-slider-id='slider-css' type="text" data-slider-min="0" data-slider-max="1" data-slider-step="0.01" data-slider-value="0.5"/></li> 
-            <li class="list-group-item"><input id="Crossover_rate" data-slider-id='slider-css' type="text" data-slider-min="0" data-slider-max="1" data-slider-step="0.01" data-slider-value="0.5"/></li> 
-          </ul>
-          <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="width:100%;"><span id="crossover">Crossover method</span>
-            <span class="caret"></span></button>
-            <input type='hidden' id="type" value='crossover'>
-            <ul class="dropdown-menu">
-              <li><a href="#">OC</a></li>
-              <li><a href="#">MPC</a></li>
-              <li><a href="#">PMC</a></li>
-            </ul>
-          </div>
-          <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="width:100%;"><span id="mutation">Mutation method</span>
-            <span class="caret"></span></button>
-            <input type='hidden' id="type" value='mutation'>
-            <ul class="dropdown-menu">
-              <li><a href="#">Swap</a></li>
-              <li><a href="#">Insertion</a></li>
-              <li><a href="#">Displacement</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
+      
     {% if view == '2D' %}
       <div id="map">
     {% else %}
       <div id="earth" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 100%;">
     {% endif %}
     <script>
+      function toggleVisualizationSpeed() {
+        var content = document.getElementById("visualizationSpeedContent");
+        content.style.display = (content.style.display === "none" || content.style.display === "") ? "block" : "none";
+      }
+      
+      function toggleDeterministicAlgorithm() {
+        var content = document.getElementById("deterministicAlgorithmContent");
+        content.style.display = (content.style.display === "none" || content.style.display === "") ? "block" : "none";
+      }
+
+      function toggleGeneticAlgorithm() {
+        var content = document.getElementById("geneticAlgorithmContent");
+        content.style.display = (content.style.display === "none" || content.style.display === "") ? "block" : "none";
+      }
+      // Add JavaScript to handle the button click and toggle the container visibility
+      document.getElementById('togglePanelGroup').addEventListener('click', function () {
+          var containerPanelGroups = document.getElementById('containerPanelGroups');
+          if (containerPanelGroups.style.display === 'none' || containerPanelGroups.style.display === '') {
+              containerPanelGroups.style.display = 'block';
+          } else {
+              containerPanelGroups.style.display = 'none';
+          }
+      });
+
+
       document.getElementById("file").onchange = function() {
         $("#fileform").submit();
       };
