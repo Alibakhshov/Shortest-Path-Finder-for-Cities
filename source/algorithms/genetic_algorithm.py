@@ -105,12 +105,12 @@ class GeneticAlgorithm(LocalOptmizationHeuristics):
             generation = sorted(sample(generation, 30), key=self.compute_length)[10:]
         while len(generation) < 70:
             generation.append(self.generate_solution())
-        return generation
+        print("Filled generation:", generation)
 
     def cycle(self, generation, **data):
         cr, crossover = data['cr'], self.crossovers[data['crossover']]
         mr, mutation = data['mr'], self.mutations[data['mutation']]
-        # selection: we keep only the 10 best individual of the last generation
+        # selection: we keep only the 10 best individuals of the last generation
         ng = self.fill_generation(generation)
         # crossover step: parents par, new generation ng
         for par in zip(generation[::2], generation[1::2]):
@@ -119,4 +119,6 @@ class GeneticAlgorithm(LocalOptmizationHeuristics):
         ng = [getattr(self, mutation)(i) if random() < mr else i for i in ng]
         # order the generation according to the fitness value
         ng = sorted(ng, key=self.compute_length)
-        return ng, self.format_solution(ng[0]), self.compute_length(ng[0])
+        print("New generation:", ng)
+        print("Best solution:", self.format_solution(ng[0]))
+        print("Best length:", self.compute_length(ng[0]))

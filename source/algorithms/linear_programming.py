@@ -2,7 +2,7 @@ from .base_algorithm import BaseAlgorithm
 from itertools import chain, combinations
 try:
     from cvxopt import matrix, glpk
-    from numpy import float, full
+    from numpy import full, float
 except ImportError:
     import warnings
     warnings.warn('cvxopt/numpy import failed: linear programming will not work')
