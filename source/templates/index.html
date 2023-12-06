@@ -21,6 +21,10 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
 
+  <!-- Coin Changing -->
+  <script src="https://threejs.org/build/three.js"></script>
+  <script src="{{ url_for('static', filename='jquery/coinChange.js') }}"></script>
+
 
   {% if view == '2D' %}
       <script src="{{ url_for('static', filename='leaflet/leaflet.js') }}"></script>
@@ -50,6 +54,8 @@
     
         <strong><p class="btn btn-danger score" style="min-width:100px;" id="score">Score</p></strong>
         <button type="button" class="btn btn-primary" id="togglePanelGroup">Toggle Panel Group</button>
+        <a href="{{ url_for('tsp_app.coin_changing') }}" class="btn btn-primary">Coin Changing Page</a>
+
       </div>
     </form>
     
@@ -102,6 +108,21 @@
             <input id="base_slider" data-slider-id='slider-css' type="text" data-slider-min="1" data-slider-max="1000" data-slider-step="10" data-slider-value="100" />
           </div>
         </div>
+
+        <div class="panel panel-transparent" style="cursor: pointer;">
+          <div class="panel-heading" onclick="toggleCoinChange()">Coin Changing Problem</div>
+          <div class="panel-body" id="coinChangeContent" style="display: none;">
+            <label for="amount">Enter Amount:</label>
+            <input type="number" id="amount" min="1" step="1" placeholder="Enter amount">
+            <br>
+            <label for="coins">Enter Coins (comma-separated):</label>
+            <input type="text" id="coins" placeholder="Enter coins">
+            <br>
+            <button onclick="solveCoinChange()" >Solve</button>
+          </div>
+        </div>
+
+        
         
 
       </div>
@@ -167,6 +188,12 @@
       <div id="earth" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 100%;">
     {% endif %}
     <script>
+
+      function toggleCoinChange() {
+        var content = document.getElementById("coinChangeContent");
+        content.style.display = (content.style.display === "none" || content.style.display === "") ? "block" : "none";
+      }
+
       function toggleVisualizationSpeed() {
         var content = document.getElementById("visualizationSpeedContent");
         content.style.display = (content.style.display === "none" || content.style.display === "") ? "block" : "none";

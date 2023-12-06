@@ -61,6 +61,11 @@ def index():
         async_mode=socketio.async_mode
     )
     
+@bp.route('/coin-changing', methods=['GET'])
+def coin_changing():
+    return render_template('coinChanging.html')
+
+    
 
 @bp.route('/<algorithm>', methods=['POST'])
 def algorithm(algorithm):
