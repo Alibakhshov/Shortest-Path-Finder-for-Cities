@@ -40,8 +40,20 @@ class BaseAlgorithm():
         return self.distances
 
     # add node k between node i and node j
+    # def add(self, i, j, k):
+    #     return self.distances[i][k] + self.distances[k][j] - self.distances[i][j]
     def add(self, i, j, k):
-        return self.distances[i][k] + self.distances[k][j] - self.distances[i][j]
+        if (
+            i is not None and j is not None and k is not None and
+            i in self.distances and k in self.distances[i] and
+            j in self.distances[k] and i in self.distances[k]
+        ):
+            return self.distances[i][k] + self.distances[k][j] - self.distances[i][j]
+        else:
+            # Handle the case where one or more keys are not present or are None
+            print(f"Invalid keys: i={i}, j={j}, k={k}")
+            return float('inf')  # or any other large value
+
 
     def generate_solution(self):
         return sample(self.cities, len(self.cities))

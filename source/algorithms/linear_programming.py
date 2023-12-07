@@ -39,7 +39,10 @@ class LinearProgramming(BaseAlgorithm):
         _, x = glpk.ilp(c, G.T, h, A.T, b, B=set(range(sx)))
         reverse_mapping = [(i + 1, j + 1) for i in range(n) for j in range(i + 1, n)]
         tour = self.edges_to_tour([reverse_mapping[k] for k in range(sx) if x[k]])
-        intermediate_steps = [[]]
-        for point in self.format_solution(tour):
-            intermediate_steps.append(intermediate_steps[-1] + [point])
-        return intermediate_steps[2:], [self.compute_length(tour)] * n
+        intermediate_steps = [self.format_solution(tour[:i+1]) for i in range(len(tour))]
+        print("\nIntermediate Steps for Linear Programming:")
+        for step in intermediate_steps[1:]:
+            print(step)
+        print("\nLengths for Linear Programming:")
+        print([self.compute_length(tour)] * n)
+        return intermediate_steps[1:], [self.compute_length(tour)] * n
