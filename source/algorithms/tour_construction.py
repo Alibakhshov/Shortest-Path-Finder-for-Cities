@@ -3,9 +3,7 @@ from operator import itemgetter
 from random import randrange
 
 class TourConstructionHeuristics(BaseAlgorithm):
-
-    # ... (existing methods)
-
+    
     def closest_neighbor(self, tour, node, in_tour=False, farthest=False):
         neighbors = self.distances[node]
         current_dist = [(c, d) for c, d in neighbors.items()

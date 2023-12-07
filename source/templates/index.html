@@ -54,7 +54,7 @@
     
         <strong><p class="btn btn-danger score" style="min-width:100px;" id="score">Distance</p></strong>
         <button type="button" class="btn btn-primary" id="togglePanelGroup">Toggle Panel Group</button>
-        {% comment %} <a href="{{ url_for('tsp_app.coin_changing') }}" class="btn btn-primary">Coin Changing Page</a> {% endcomment %}
+        <!-- <a href="{{ url_for('tsp_app.coin_changing') }}" class="btn btn-primary">Coin Changing Page</a> -->
 
       </div>
     </form>
@@ -146,7 +146,7 @@
         </div>
       
         <div class="panel panel-transparent" style="cursor:pointer;">
-          <div class="panel-heading" onclick="toggleGeneticAlgorithm()">Genetic algorithm</div>
+          <div class="panel-heading" onclick="toggleGeneticAlgorithm()"><p id="generation">Genetic algorithm</p></div>
           <div class="panel-body" id="geneticAlgorithmContent" style="display: none;">
             <div class="btn-group-vertical btn-block">
               <button type="button" class="btn btn-primary" onclick="geneticAlgorithm('genetic_algorithm')">Start</button>
